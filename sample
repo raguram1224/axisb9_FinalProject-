@@ -1,0 +1,81 @@
+import React, { useState } from 'react';
+import './styles.css';
+
+
+
+function AdminLogin(props) {
+  return (
+    <div className="content">
+      <div className="text">Admin Login</div>
+      <form>
+        <div className="field">
+          <span className="fas fa-user"></span>
+          <input type="text" required />
+          <label>User name</label>
+        </div>
+        <div className="field">
+          <span className="fas fa-lock"></span>
+          <input type="password" />
+          <label>Password</label>
+        </div>
+        <div className="forgot-pass">
+          <a href="#">Forgot Password?</a>
+        </div>
+        <button>Sign in</button>
+        <p>
+          Are u a Employee?
+          <span>
+            <a href="#" onClick={() => props.setShowForm("employee")}>
+              Click Here
+            </a>
+          </span>
+        </p>
+      </form>
+    </div>
+  );
+}
+
+function EmployeeLogin(props) {
+  return (
+    <div className="content">
+      <div className="text">Login Form</div>
+      <form>
+        <div className="field">
+          <span className="fas fa-user"></span>
+          <input id="empid" type="text" required />
+          <label>Email or Employee ID</label>
+        </div>
+        <div className="field">
+          <span className="fas fa-eye"></span>
+          <input id="otp" type="number" name="otp" pattern="[0-9]" title="OTP" />
+          <label>Enter Your OTP</label>
+        </div>
+        <button>Sign in</button>
+        <p>
+          Are u an admin?
+          <span>
+            <a href="#" onClick={() => props.setShowForm("admin")}>
+              Click Here
+            </a>
+          </span>
+        </p>
+      </form>
+    </div>
+  );
+}
+
+function LoginForm() {
+  const [showForm, setShowForm] = useState("employee");
+
+  return (
+    <div>
+      {showForm === "admin" ? (
+        <AdminLogin setShowForm={setShowForm} />
+      ) : (
+        <EmployeeLogin setShowForm={setShowForm} />
+      )}
+    </div>
+  );
+}
+
+export default LoginForm;
